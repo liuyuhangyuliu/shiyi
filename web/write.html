@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.zhimg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="public/css/hover.css">
+  <title>创作</title>
+
+  <style>
+    body{
+      margin: 0;
+    }
+    *{
+      padding: 0;
+      margin: 0;
+    }
+
+    html,body{
+      width: 100%;
+      height: 100%;
+    }
+    #app{
+      width: 100%;
+      height: 100%;
+      background-color: aliceblue;
+    }
+
+    .aside{
+      width: 25%;
+      float: left;
+      height: 100%;
+      background: url("public/images/snow.jpg") center;
+      background-size: cover;
+      position: relative;
+      z-index: 100;
+    }
+    .cover{
+      width: 100%;
+      height: 100%;
+      float: left;
+      position: relative;
+      z-index: 100;
+    }
+    .copyright-panel{
+      display: block;
+      position: absolute;
+      bottom: 0;
+      text-align: center;
+      width: 100%;
+      padding-bottom: 20px;
+    }
+    .main{
+      width: 75%;
+      /*这个高度非常重要
+      不设成100%就会导致cover也跟着动
+      也就是overflow-y不生效*/
+      height: 100%;
+      overflow-y: auto;
+      position: relative;
+      float: left;
+
+    }
+    .main::-webkit-scrollbar {
+      width: 0;
+
+    }
+
+    .content{
+      padding: 160px 9% 20px 7%;
+    }
+    .item{
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+    .logo{
+      background-image: url("public/images/logo.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      display: block;
+      margin: 0 auto;
+      zoom: 130%;
+      height: 130px;
+    }
+    .header{
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 100px;
+
+      z-index: 99;
+      backdrop-filter: blur(10px);
+      background-color: transparent;
+    }
+    #header_search{
+      padding-top: 30px;
+    }
+    .menu{
+      padding-top: 25px;
+      padding-right: 49px;
+    }
+
+    .tabbar i{
+      font-size: 27px;
+      font-weight: 700;
+      color: cornflowerblue;
+    }
+    .tabbar li{
+      padding-right: 30px;
+
+    }
+    .tabbar div{
+      font-size: 14px;
+      line-height: 2;
+    }
+    .avatar{
+      padding-top: 25px;
+      padding-left: 73px;
+    }
+    li{
+      display: inline-block;
+    }
+    i{
+      display: block;
+    }
+    p{
+      font-size: small;
+      color: wheat;
+    }
+
+    .cmt-icon:hover{
+      color: cornflowerblue;
+    }
+
+    .content{
+      width: 75%;
+      /*这个高度非常重要
+      不设成100%就会导致cover也跟着动
+      也就是overflow-y不生效*/
+      height: 100%;
+      overflow-y: auto;
+      position: relative;
+      float: left;
+
+
+      background: url("public/images/birds.png") center;
+      background-size: 100% 84%;
+    }
+
+    a{
+      text-decoration: none;
+      color: black;
+    }
+    a:hover{
+      color: #409EFF;
+    }
+    .el-textarea{
+      width: 93%;
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+    .el-tag{
+      margin-bottom: 50px;
+    }
+  </style>
+</head>
+
+
+
+<body>
+<div id="app">
+  <div class="header">
+
+    <el-row  type="flex" justify="end">
+      <el-col :span="5" :pull="2" id="header_search">
+        <div class="search">
+          <el-input  prefix-icon="el-icon-search" placeholder="搜索诗歌/诗人"></el-input>
+        </div>
+
+      </el-col>
+
+      <el-col :span="4" :pull="0" class="menu">
+        <ul class="tabbar">
+          <li class="menu-item">
+
+            <a href="http://localhost:8080/shiyi_war/">
+              <i class="el-icon-house hvr-grow" style="display: block"></i>
+              <div>首页</div>
+            </a>
+
+
+          </li>
+          <li class="menu-item">
+            <a href="http://localhost:8080/shiyi_war/about.html">
+              <i class="el-icon-link hvr-grow" style="display: block"></i>
+              <div>关于</div>
+            </a>
+
+          </li>
+          <li class="menu-item">
+            <a href="http://localhost:8080/shiyi_war/write.html">
+              <i class="el-icon-edit-outline hvr-grow"  style="display: block"></i>
+              <div>创作</div>
+            </a>
+
+          </li>
+
+        </ul>
+      </el-col>
+      <el-col :span="2" class="avatar">
+
+
+        <div v-if="!avatarSrc">
+          <a href="http://localhost:8080/shiyi_war/login.html">
+            <el-avatar >登录</el-avatar>
+          </a>
+        </div>
+        <div v-else>
+          <a href="http://localhost:8080/shiyi_war/profile.html">
+            <el-avatar  :src="avatarSrc">
+
+            </el-avatar>
+          </a>
+
+        </div>
+
+
+
+      </el-col>
+    </el-row>
+
+  </div>
+
+  <div class="aside">
+    <div class="cover">
+      <div class="copyright-panel">
+        <a href="" class="logo"></a>
+        <p style="margin-bottom: 10px">Copyright © 2023 All Rights Reserved</p>
+        <p>E-mail:2196933343@qq.com</p>
+      </div>
+    </div>
+  </div>
+  <div class="main">
+    <div class="sidebar">
+      <el-backtop target=".main" :bottom="100"></el-backtop>
+    </div>
+    <div class="content">
+
+      <div class="panel">
+        <el-card class="box-card">
+          <el-row>
+            <el-tag>标题</el-tag>
+            <el-input
+                    type="textarea"
+                    :autosize="{ minRows: 1, maxRows: 2}"
+                    placeholder="请输入标题"
+                    v-model="title">
+            </el-input>
+          </el-row>
+          <el-row>
+            <el-tag>描述</el-tag>
+
+            <el-input
+                    type="textarea"
+                    :autosize="{ minRows: 1, maxRows: 100}"
+                    placeholder="请输入描述"
+                    v-model="preview">
+            </el-input>
+          </el-row>
+          <el-row>
+            <el-tag>正文</el-tag>
+
+            <el-input
+                    type="textarea"
+                    :autosize="{ minRows: 1, maxRows: 100}"
+                    placeholder="请输入内容"
+                    v-model="content">
+            </el-input>
+          </el-row>
+          <el-row>
+            <el-tag style="position: relative;bottom: 184px;">封面配图</el-tag>
+            <el-upload
+                    class="upload-demo"
+                    drag
+                    style="display: inline-block;margin-left: 146px"
+                    action="http://localhost:8080/shiyi_war/postArticleCover"
+                    :on-success="handleSuccess"
+                    multiple>
+              <i class="el-icon-upload"></i>
+              <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+              <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+            </el-upload>
+          </el-row>
+
+          <el-row>
+            <el-button style="width: 33%;left: 33%;position: relative;" type="primary" plain @click="postArticle()">
+              发表
+            </el-button>
+          </el-row>
+
+
+
+
+
+
+        </el-card>
+      </div>
+
+
+
+
+    </div>
+  </div>
+</div>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+<script src="https://unpkg.zhimg.com/element-ui@2.15.13/lib/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script>
+  new Vue({
+    el:"#app",
+    data(){
+      return{
+        avatarSrc : "",
+        content : "",
+        title : "",
+        coverSrc : "",
+        preview : ""
+
+
+      }
+    },
+    mounted(){
+      var _this = this;
+
+      let url = new URL(window.location.href);
+
+
+
+
+      this.avatarSrc = Cookies.get('avatarSrc');
+
+    },
+    methods:{
+      handleSuccess(resp,file){
+
+        console.log(resp,file);
+        this.coverSrc = resp;
+      },
+      postArticle(){
+        var _this = this;
+        let json ={
+          title : _this.title,
+          content : _this.content,
+          cover : _this.coverSrc,
+          preview : _this.preview,
+          username : Cookies.get('username'),
+          uid : Cookies.get('uid')
+
+        };
+        axios({
+          method : "post",
+          url : "http://localhost:8080/shiyi_war/postArticle",
+          data : JSON.stringify(json)
+        }).then(function(resp){
+
+          _this.$message({
+            message: '发表成功~',
+            type: 'success',
+            duration : 2000,
+            onClose : function(){
+              window.location.href = 'http://localhost:8080/shiyi_war/index.html';
+            }
+          });
+        })
+      }
+    }
+  })
+
+</script>
+
+
+</html>

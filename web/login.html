@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录/注册</title>
+    <link rel="stylesheet" href="https://unpkg.zhimg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="public/css/hover.css">
+    <style>
+      *{
+        padding: 0;
+        margin: 0;
+      }
+      html,body{
+        width: 100%;
+        height: 100%;
+      }
+      #app{
+        width: 100%;
+        height: 100%;
+        background-color: aliceblue;
+      }
+      .el-tabs{
+        height: 501px;
+        width: 76%;
+        border-radius: 9px;
+
+      }
+
+      .el-tab-panel{
+        height: 100%;
+      }
+      .el-tabs__item{
+        padding-top: 90px;
+        height: 50%;
+      }
+      .el-tabs__nav{
+        height: 100%;
+      }
+      .el-form{
+        height: 100%;
+      }
+
+      .el-tabs__content{
+        height: 100%;
+      }
+      .login .el-form-item:nth-child(3){
+        position: absolute;
+        bottom: 40px;
+        width: 100%;
+      }
+      .register .el-form-item:nth-child(4){
+        position: absolute;
+        bottom: 40px;
+        width: 100%;
+      }
+
+      .el-button{
+
+        width: 58%;
+        margin-left: 80px;
+      }
+
+      .panel{
+        padding: 192px 95px 95px 664px;
+      }
+
+      .aside{
+        width: 25%;
+        float: left;
+        height: 100%;
+        background: url("public/images/snow.jpg") center;
+        background-size: cover;
+        position: relative;
+        z-index: 100;
+      }
+      .cover{
+        width: 100%;
+        height: 100%;
+        float: left;
+        position: relative;
+        z-index: 100;
+      }
+      .copyright-panel{
+        display: block;
+        position: absolute;
+        bottom: 0;
+        text-align: center;
+        width: 100%;
+        padding-bottom: 20px;
+      }
+
+
+
+      .logo{
+        background-image: url("public/images/logo.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        display: block;
+        margin: 0 auto;
+        zoom: 130%;
+        height: 130px;
+      }
+      .header{
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 100px;
+        z-index: 99;
+        backdrop-filter: blur(10px);
+        background-color: transparent;
+      }
+
+      #header_search{
+        padding-top: 30px;
+      }
+      .menu{
+        padding-top: 25px;
+        padding-right: 49px;
+      }
+
+      .tabbar i{
+        font-size: 27px;
+        font-weight: 700;
+        color: #409EFF;
+      }
+      .tabbar li{
+        padding-right: 30px;
+
+      }
+      .tabbar div{
+        font-size: 14px;
+        line-height: 2;
+      }
+      .avatar{
+        padding-top: 25px;
+        padding-left: 73px;
+      }
+      li{
+        display: inline-block;
+      }
+      i{
+        display: block;
+      }
+      p{
+        font-size: small;
+        color: wheat;
+      }
+      a{
+        text-decoration: none;
+        color: black;
+      }
+      a:hover{
+        color: #409EFF;
+      }
+
+    </style>
+
+</head>
+<body>
+<div id="app">
+  <div class="header">
+
+    <el-row  type="flex" justify="end">
+      <el-col :span="5" :pull="2" id="header_search">
+        <div class="search">
+          <el-input  prefix-icon="el-icon-search" placeholder="搜索诗歌/诗人"></el-input>
+        </div>
+
+      </el-col>
+
+      <el-col :span="4" :pull="0" class="menu">
+        <ul class="tabbar">
+          <li class="menu-item">
+            <a href="http://localhost:8080/shiyi_war/">
+              <i class="el-icon-house hvr-grow" style="display: block"></i>
+              <div>首页</div>
+
+            </a>
+
+
+          </li>
+          <li class="menu-item">
+            <a href="http://localhost:8080/shiyi_war/about.html">
+              <i class="el-icon-link hvr-grow" style="display: block"></i>
+              <div>关于</div>
+            </a>
+
+          </li>
+          <li class="menu-item">
+            <a href="http://localhost:8080/shiyi_war/write.html">
+              <i class="el-icon-edit-outline hvr-grow"  style="display: block"></i>
+              <div>创作</div>
+            </a>
+
+          </li>
+
+        </ul>
+      </el-col>
+      <el-col :span="2" class="avatar">
+        <a href="http://localhost:8080/shiyi_war/profile.html">
+          <el-avatar v-if="!user" icon="el-icon-user-solid"></el-avatar>
+          <el-avatar v-else :src="user.avatarSrc"></el-avatar>
+        </a>
+
+      </el-col>
+    </el-row>
+
+  </div>
+
+  <div class="aside">
+    <div class="cover">
+      <div class="copyright-panel">
+        <a href="" class="logo"></a>
+        <p style="margin-bottom: 10px">Copyright © 2023 All Rights Reserved</p>
+        <p>E-mail:2196933343@qq.com</p>
+      </div>
+    </div>
+  </div>
+  <div class="panel">
+    <el-tabs type="border-card"  tab-position="left">
+      <el-tab-pane label="登录"  class="login">
+        <el-form>
+          <el-form-item>
+            <el-input placeholder="请输入账号" v-model="username"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-input placeholder="请输入密码" v-model="password"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-alert type="error" title="用户名或密码错误~" show-icon v-if="errorCode"></el-alert>
+            <el-alert type="success" title="欢迎回来~" show-icon v-if="user"></el-alert>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" round @click="onSubmit()">登录</el-button>
+          </el-form-item>
+        </el-form>
+
+
+
+      </el-tab-pane>
+      <el-tab-pane label="注册"  class="register">
+        <el-form>
+          <el-form-item>
+            <el-input placeholder="请输入用户名" v-model="username_r"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-input placeholder="请输入密码" type="password" v-model="password1_r"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-input placeholder="请再次确认密码" type="password" v-model="password2_r"></el-input>
+            <el-alert v-if="errorCode == 2" show-icon title="两次密码不同~"></el-alert>
+            <el-alert v-if="errorCode == 3" show-icon title="用户名已存在~"></el-alert>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" round @click="Register()">注册</el-button>
+          </el-form-item>
+        </el-form>
+
+
+
+
+      </el-tab-pane>
+    </el-tabs>
+
+  </div>
+
+</div>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+<script src="https://unpkg.zhimg.com/element-ui@2.15.13/lib/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  // errorCode 0：正常
+  //           1：登录 无用户名与密码对应的用户
+  //           2：注册 先后两次输入密码不同
+  //           3：注册 用户名已存在
+
+  new Vue({
+    el:"#app",
+    data:{
+      username : "",
+      password : "",
+      errorCode : 0,
+      user : null,
+      username_r : "",
+      password1_r : "",
+      password2_r : ""
+    },
+    mounted(){
+      // var _this = this;
+    },
+
+    methods:{
+      onSubmit(){
+        let _this = this;
+        let data = new FormData();
+        data.append('username',this.username);
+        data.append('password',this.password);
+        axios({
+          method:"post",
+          url:"http://localhost:8080/shiyi_war/selectUser",
+          headers: {
+            "Content-Type": "multipart/form-data"
+          },
+          data:data
+
+        }).then(function(resp){
+          if(false === resp.data){
+
+            _this.errorCode = 1;
+
+
+          }else{
+            _this.errorCode = 0;
+            _this.user = resp.data;
+
+            window.location.href = "http://localhost:8080/shiyi_war/?username="+_this.username;
+
+          }
+        })
+      },
+
+      Register(){
+
+        if(this.password1_r !== this.password2_r){
+          this.errorCode = 2;
+          return;
+        }
+
+        let _this = this;
+        let data = new FormData();
+        data.append('username',this.username_r);
+        data.append('password',this.password1_r);
+        axios({
+          method: "post",
+          url : "http://localhost:8080/shiyi_war/selectUserByUsername",
+          headers: {
+            "Content-Type": "multipart/form-data"
+          },
+          data : data
+         }).then(function(resp){
+
+          //console.log(resp.data)
+
+          if("existing" == resp.data){
+            _this.errorCode = 3;
+            return;
+          }
+
+          window.location.href = "http://localhost:8080/shiyi_war/?username="+_this.username_r;
+
+        })
+
+      }
+    }
+  })
+
+</script>
+</html>

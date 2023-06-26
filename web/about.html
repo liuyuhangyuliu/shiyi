@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.zhimg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="public/css/hover.css">
+    <title>关于</title>
+
+    <style>
+        body{
+            margin: 0;
+        }
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        #app{
+            width: 100%;
+            height: 100%;
+            background-color: aliceblue;
+        }
+
+        .aside{
+            width: 25%;
+            float: left;
+            height: 100%;
+            background: url("public/images/snow.jpg") center;
+            background-size: cover;
+            position: relative;
+            z-index: 100;
+        }
+        .cover{
+            width: 100%;
+            height: 100%;
+            float: left;
+            position: relative;
+            z-index: 100;
+        }
+        .copyright-panel{
+            display: block;
+            position: absolute;
+            bottom: 0;
+            text-align: center;
+            width: 100%;
+            padding-bottom: 20px;
+        }
+        .main{
+            width: 75%;
+            /*这个高度非常重要
+            不设成100%就会导致cover也跟着动
+            也就是overflow-y不生效*/
+            height: 100%;
+            overflow-y: auto;
+            position: relative;
+            float: left;
+
+        }
+        .main::-webkit-scrollbar {
+            width: 0;
+
+        }
+
+        .content{
+            padding: 160px 9% 20px 7%;
+        }
+        .item{
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        .logo{
+            background-image: url("public/images/logo.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            display: block;
+            margin: 0 auto;
+            zoom: 130%;
+            height: 130px;
+        }
+        .header{
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 100px;
+
+            z-index: 99;
+            backdrop-filter: blur(10px);
+            background-color: transparent;
+        }
+        #header_search{
+            padding-top: 30px;
+        }
+        .menu{
+            padding-top: 25px;
+            padding-right: 49px;
+        }
+
+        .tabbar i{
+            font-size: 27px;
+            font-weight: 700;
+            color: cornflowerblue;
+        }
+        .tabbar li{
+            padding-right: 30px;
+
+        }
+        .tabbar div{
+            font-size: 14px;
+            line-height: 2;
+        }
+        .avatar{
+            padding-top: 25px;
+            padding-left: 73px;
+        }
+        li{
+            display: inline-block;
+        }
+        i{
+            display: block;
+        }
+        p{
+            font-size: small;
+            color: wheat;
+        }
+
+        .cmt-icon:hover{
+            color: cornflowerblue;
+        }
+
+        .content{
+            width: 75%;
+            /*这个高度非常重要
+            不设成100%就会导致cover也跟着动
+            也就是overflow-y不生效*/
+            height: 100%;
+            overflow-y: auto;
+            position: relative;
+            float: left;
+
+
+            background: url("public/images/birds.png") center;
+            background-size: 100% 84%;
+        }
+
+        a{
+            text-decoration: none;
+            color: black;
+        }
+        a:hover{
+            color: #409EFF;
+        }
+        .el-textarea{
+            width: 93%;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+        .el-tag{
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+
+
+
+<body>
+<div id="app">
+    <div class="header">
+
+        <el-row  type="flex" justify="end">
+            <el-col :span="5" :pull="2" id="header_search">
+                <div class="search">
+                    <el-input  prefix-icon="el-icon-search" placeholder="搜索诗歌/诗人"></el-input>
+                </div>
+
+            </el-col>
+
+            <el-col :span="4" :pull="0" class="menu">
+                <ul class="tabbar">
+                    <li class="menu-item">
+
+                        <a href="http://localhost:8080/shiyi_war/">
+                            <i class="el-icon-house hvr-grow" style="display: block"></i>
+                            <div>首页</div>
+                        </a>
+
+
+                    </li>
+                    <li class="menu-item">
+                        <a href="http://localhost:8080/shiyi_war/about.html">
+                            <i class="el-icon-link hvr-grow" style="display: block"></i>
+                            <div>关于</div>
+                        </a>
+
+                    </li>
+                    <li class="menu-item">
+                        <a href="http://localhost:8080/shiyi_war/write.html">
+                            <i class="el-icon-edit-outline hvr-grow"  style="display: block"></i>
+                            <div>创作</div>
+                        </a>
+
+                    </li>
+
+                </ul>
+            </el-col>
+
+        </el-row>
+
+    </div>
+
+    <div class="aside">
+        <div class="cover">
+            <div class="copyright-panel">
+                <a href="" class="logo"></a>
+                <p style="margin-bottom: 10px">Copyright © 2023 All Rights Reserved</p>
+                <p>E-mail:2196933343@qq.com</p>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="sidebar">
+            <el-backtop target=".main" :bottom="100"></el-backtop>
+        </div>
+        <div class="content">
+
+            <div class="panel">
+                <el-card class="box-card">
+       <span>
+         • ui设计参考
+         <el-link type="primary" href="https://www.ghostoact.com/">幽灵疾步网站</el-link>
+       </span>
+                    <el-divider></el-divider>
+                    <span>
+            • 前端组件库
+            <el-link type="primary" href="https://element.eleme.cn/#/zh-CN">element-ui</el-link>
+          </span>
+                    <el-divider></el-divider>
+                    <span>
+            • 前端框架
+            <el-link type="primary" href="https://cn.vuejs.org/">Vue.js</el-link>(vue2.x)
+          </span>
+                    <el-divider></el-divider>
+                    <span>
+            • 持久层框架
+            <el-link type="primary" href="https://mybatis.org/mybatis-3/zh/index.html">MyBatis</el-link>
+          </span>
+                    <el-divider></el-divider>
+                    <span>
+            • 开发环境 IntelliJ IDEA 2022.1.3 (Ultimate Edition)/Tomcat 9.0.64/maven构建
+          </span>
+
+
+
+
+
+
+
+                </el-card>
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+<script src="https://unpkg.zhimg.com/element-ui@2.15.13/lib/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data(){
+            return{
+
+
+            }
+        },
+        mounted(){
+
+        },
+        methods:{
+
+        }
+    })
+
+</script>
+
+
+</html>

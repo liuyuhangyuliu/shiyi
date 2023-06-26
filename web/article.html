@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>文章详情</title>
+  <link rel="stylesheet" href="https://unpkg.zhimg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="public/css/hover.css">
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    /*font-family{"Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;}*/
+    html,body{
+      width: 100%;
+      height: 100%;
+    }
+    #app{
+      width: 100%;
+      height: 100%;
+      background-color: aliceblue;
+    }
+    .el-tabs{
+      height: 501px;
+      width: 76%;
+      border-radius: 9px;
+
+    }
+
+
+
+
+
+    /*.el-button{*/
+
+    /*  width: 58%;*/
+    /*  margin-left: 80px;*/
+    /*}*/
+
+    .panel{
+      width: 75%;
+      /*这个高度非常重要
+      不设成100%就会导致cover也跟着动
+      也就是overflow-y不生效*/
+      height: 100%;
+      overflow-y: auto;
+      position: relative;
+      float: left;
+
+
+      background: url("public/images/birds.png") center;
+      background-size: 100% 84%;
+    }
+
+    .aside{
+      width: 25%;
+      float: left;
+      height: 100%;
+      background: url("public/images/snow.jpg") center;
+      background-size: cover;
+      position: relative;
+      z-index: 100;
+    }
+    .cover{
+      width: 100%;
+      height: 100%;
+      float: left;
+      position: relative;
+      z-index: 100;
+    }
+    .copyright-panel{
+      display: block;
+      position: absolute;
+      bottom: 0;
+      text-align: center;
+      width: 100%;
+      padding-bottom: 20px;
+    }
+
+
+
+    .logo{
+      background-image: url("public/images/logo.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      display: block;
+      margin: 0 auto;
+      zoom: 130%;
+      height: 130px;
+    }
+    .header{
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 100px;
+      z-index: 99;
+      backdrop-filter: blur(10px);
+      background-color: transparent;
+    }
+
+    #header_search{
+      padding-top: 30px;
+    }
+    .menu{
+      padding-top: 25px;
+      padding-right: 49px;
+    }
+
+    .tabbar i{
+      font-size: 27px;
+      font-weight: 700;
+      color: #409EFF;
+    }
+    .tabbar li{
+      padding-right: 30px;
+
+    }
+    .tabbar div{
+      font-size: 14px;
+      line-height: 2;
+    }
+    .avatar{
+      padding-top: 25px;
+      padding-left: 73px;
+    }
+    li{
+      display: inline-block;
+    }
+    i{
+      display: block;
+    }
+    p{
+      font-size: small;
+      color: wheat;
+    }
+    .el-card{
+
+      width: 50%;
+      margin-top: 130px;
+      margin-left: 300px;
+      margin-bottom: 10px;
+      font-family: fangsong;
+      font-size: larger;
+
+
+    }
+
+    .title,.author{
+      display: block;
+    }
+
+    .author{
+      line-height: 2;
+    }
+
+    .el-card__header{
+      padding: 10px 20px;
+      text-align: center;
+    }
+    .click{
+      font-size: initial;
+    }
+    .click span{
+      font-family: cursive;
+    }
+    .content{
+      border-bottom: solid #bebdbd 2px;
+      padding-bottom: 50px;
+      margin-bottom: 20px;
+      white-space: pre-line;
+      text-align: center;
+    }
+
+
+    .action{
+      /*position: relative;*/
+      background-color: aliceblue;
+      padding: 6px;
+      border-radius: 8px;
+    }
+
+    .rate_all{
+      display: inline-block;
+      text-align: center;
+
+      width: 25%;
+    }
+
+    .rate_all span{
+      display: block;
+      margin-bottom: 5px;
+    }
+    .rate_user{
+      display: inline-block;
+      position: relative;
+      text-align: center;
+      /*height: 100%;*/
+      bottom: 13px;
+      margin-right: 40px;
+    }
+    .btn{
+      display: inline-block;
+      color: #409EFF;
+      position: relative;
+      bottom: 32px;
+
+    }
+    .btn i{
+      font-size: 27px;
+      font-weight: bold;
+    }
+    .btn span{
+      font-size: 20px;
+      font-weight: 100;
+    }
+    .rate_num{
+      font-size: xx-large;
+      font-weight: bold;
+    }
+    .el-rate{
+      margin-top: 22px;
+    }
+
+    .comment_part{
+      margin-top: 10px;
+    }
+
+    .el-input__inner{
+      background-color: #F2F6FC;
+    }
+    .el-input__inner:hover,.el-input__inner:focus{
+      background-color: inherit;
+    }
+
+    .cmt_user{
+      margin-bottom: 50px;
+    }
+    h5{
+      display: inline-block;
+      font-weight: lighter;
+    }
+    .comment_item{
+      line-height: 2;
+      font-family: Serif;
+      border-bottom: 2px solid #e1e1e1;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+
+    .username{
+      color: #606266;
+    }
+    .like_unlike{
+      padding: 10px 10px;
+    }
+    .comment_content{
+      font-weight: bold;
+    }
+    .time{
+      margin-right: 139px;
+    }
+    .submit_btn{
+      margin-top: 8px;
+    }
+
+    a{
+      text-decoration: none;
+      color: black;
+
+    }
+    a:hover{
+      color: #409EFF;
+    }
+
+
+
+
+  </style>
+
+</head>
+<body>
+<div id="app">
+  <div class="header">
+
+    <el-row  type="flex" justify="end">
+      <el-col :span="5" :pull="2" id="header_search">
+        <div class="search">
+          <el-input  prefix-icon="el-icon-search" placeholder="搜索诗歌/诗人"></el-input>
+        </div>
+
+      </el-col>
+
+      <el-col :span="4" :pull="0" class="menu">
+        <ul class="tabbar">
+          <li class="menu-item">
+
+            <a href="http://localhost:8080/shiyi_war/">
+              <i class="el-icon-house hvr-grow" style="display: block"></i>
+              <div>首页</div>
+            </a>
+
+          </li>
+          <li class="menu-item">
+            <a href="http://localhost:8080/shiyi_war/about.html">
+              <i class="el-icon-link hvr-grow" style="display: block"></i>
+              <div>关于</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="http://localhost:8080/shiyi_war/write.html">
+              <i class="el-icon-edit-outline hvr-grow"  style="display: block"></i>
+              <div>创作</div>
+            </a>
+          </li>
+
+        </ul>
+      </el-col>
+      <el-col :span="2" class="avatar">
+        <div v-if="!avatarSrc">
+          <a href="http://localhost:8080/shiyi_war/login.html">
+            <el-avatar >登录</el-avatar>
+          </a>
+        </div>
+        <div v-else>
+          <a href="http://localhost:8080/shiyi_war/profile.html">
+            <el-avatar  :src="avatarSrc">
+
+            </el-avatar>
+          </a>
+
+        </div>
+
+      </el-col>
+    </el-row>
+
+  </div>
+
+  <div class="aside">
+    <div class="cover">
+      <div class="copyright-panel">
+        <a href="" class="logo"></a>
+        <p style="margin-bottom: 10px">Copyright © 2023 All Rights Reserved</p>
+        <p>E-mail:2196933343@qq.com</p>
+      </div>
+    </div>
+  </div>
+  <div class="panel">
+    <el-card class="box-card article_part">
+      <div slot="header" class="clearfix">
+        <h2 class="title">{{article.articleTitle}}</h2>
+        <span class="author">{{article.articleAuthor}}</span>
+        <div class="click">
+          <i class="el-icon-view"></i>
+          <span class="">{{article.articleClick}}</span>
+        </div>
+
+
+      </div>
+
+      <div class="content">
+        {{article.articleContent}}
+      </div>
+
+      <div class="action">
+        <div class="rate_all">
+          <span>总评分</span>
+          <span class="rate_num">{{article.rate}}</span>
+          <span>{{article.mark_number}}票</span>
+        </div>
+        <div class="rate_user">
+          <span>我的评分</span>
+          <el-rate v-model="my_rate" @change="changeRate()"></el-rate>
+        </div>
+        <div class="btn">
+          <a href="#cmt_part" style="color: #409EFF;">
+          <i class="el-icon-chat-line-round" style="margin-right: 18px;">
+
+            <span>
+              {{article.comment_number}}
+            </span>
+
+          </i>
+          </a>
+            <i v-if="isFavorites == 1" @click="removeFromFavorites()" class="el-icon-star-on">
+
+            <span>
+              收藏
+            </span>
+
+            </i>
+            <i v-else @click="addToFavorites()" class="el-icon-star-off">
+
+            <span>
+              收藏
+            </span>
+
+            </i>
+
+
+        </div>
+
+      </div>
+
+
+
+    </el-card>
+
+    <el-card class="box-card comment_part" id="cmt_part">
+      <el-row class="cmt_user">
+        <el-col class="user_avatar" :span="2">
+          <el-avatar :src="avatarSrc"></el-avatar>
+
+        </el-col>
+        <el-col class="textarea" :span="16" :offset="1">
+          <el-input type="textarea" v-model="my_content" :autosize="{ minRows: 2, maxRows: 6}" placeholder="发一条友善的评论~" ></el-input>
+        </el-col>
+        <el-col class="submit_btn" :span="3" :offset="2">
+          <el-button type="primary" plain @click="postComment()">发布</el-button>
+
+        </el-col>
+
+      </el-row>
+      <el-row class="comment_item" v-for="(comment,i) in comments">
+        <el-col :span="2">
+          <el-avatar :src="comment.avatarSrc"></el-avatar>
+        </el-col>
+        <el-col :span="20" :offset="1">
+          <el-row class="username">
+            <h4>
+              {{comment.username}}
+            </h4>
+          </el-row>
+          <el-row class="comment_content">{{comment.content}}</el-row>
+          <el-row class="comment_action">
+            <span class="time">
+              <h5>
+                {{comment.time}}
+              </h5>
+
+            </span>
+            <span>
+              <el-button type="primary" icon="el-icon-caret-top" class="like_unlike" plain>赞同99</el-button>
+              <el-button type="primary" icon="el-icon-caret-bottom" class="like_unlike" plain></el-button>
+            </span>
+          </el-row>
+        </el-col>
+
+      </el-row>
+      <el-row class="comment_item">
+        <el-col :span="2">
+          <el-avatar src="public/images/avatar2.jpg"></el-avatar>
+        </el-col>
+        <el-col :span="20" :offset="1">
+          <el-row class="username">
+            <h4>
+              koni仙人
+            </h4>
+          </el-row>
+          <el-row class="comment_content">/***测试样例***/非常好诗歌 爱来自瓷器😁👍❤️🙌<br>就是怎么说呢，就是特别好，反正我呢是非常喜欢这首诗</el-row>
+          <el-row class="comment_action">
+            <span class="time">
+              <h5>
+                2023 4.23 20:00:01
+              </h5>
+
+            </span>
+            <span>
+              <el-button type="primary" icon="el-icon-caret-top" class="like_unlike" plain>赞同99</el-button>
+              <el-button type="primary" icon="el-icon-caret-bottom" class="like_unlike" plain></el-button>
+            </span>
+          </el-row>
+        </el-col>
+
+      </el-row>
+    </el-card>
+
+  </div>
+
+</div>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+<script src="//unpkg.zhimg.com/element-ui@2.15.13/lib/index.js"></script>
+<script src="https://unpkg.zhimg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script>
+
+
+
+  new Vue({
+    el:"#app",
+    data(){
+      return{
+        article:'',
+
+        comments : [],
+        avatarSrc : '',
+        my_content : '',
+        isFavorites : 0,
+        my_rate : 0
+      }
+    },
+    mounted(){
+
+      let url = new URL(window.location.href);
+      const query = url.searchParams.get('articleID');
+      this.query = query;
+
+      this.avatarSrc = Cookies.get('avatarSrc');
+
+
+      this.updateClick();
+      this.selectByID();
+
+      this.checkFavorites();
+
+      this.getComments();
+      this.selectMyRate();
+      //this.article = "333"
+
+      // let a = this.selectByID();
+      // console.log(a);
+
+    },
+    methods:{
+      changeRate(){
+        var _this = this;
+        if(Cookies.get("uid") == null) {
+          _this.$message({
+            message: '请先登录~',
+            type: 'warning',
+            duration: 1500,
+          });
+          return;
+        }
+        axios({
+          method : "get",
+          url : "http://localhost:8080/shiyi_war/changeRate?rate=" + _this.my_rate+"&articleID="+this.query+"&uid="+Cookies.get("uid")
+        }).then(function(resp){
+          _this.$message({
+            message: '评分成功~',
+            type: 'success',
+            duration : 1500,
+
+          });
+        });
+      },
+      selectMyRate(){
+        const _this = this;
+        //这里articleID应该从query获取，而不能用_this.article.articleID,可能selectByID()没执行完
+        //article还没初始化好，不像addToFavorites和removeFromFavorites，它俩是click触发的
+
+        let articleID = this.query;
+        //console.log(_this.article.articleID);
+        let uid = Cookies.get("uid");
+        axios({
+          method : "get",
+          url : "http://localhost:8080/shiyi_war/hasRate?articleID="+articleID+"&uid="+uid
+        }).then(function(resp){
+          if(resp.data == 0)
+            return;
+          else{
+            axios({
+              method : "get",
+              url : "http://localhost:8080/shiyi_war/selectMyRate?articleID="+articleID+"&uid="+uid
+            }).then(function(resp){
+              console.log(resp.data);
+              _this.my_rate = resp.data;
+            })
+          }
+        })
+
+      },
+      removeFromFavorites(){
+        var _this = this;
+        if(Cookies.get("uid") == null) {
+          _this.$message({
+            message: '请先登录~',
+            type: 'warning',
+            duration: 1500,
+          });
+          return;
+        }
+        let articleID = _this.article.articleID;
+        let uid = Cookies.get("uid");
+        //console.log(articleID);
+        axios({
+          method : "get",
+          url : "http://localhost:8080/shiyi_war/removeFromFavorites?articleID="+articleID+"&uid="+uid
+        }).then(function(){
+          _this.isFavorites = 0;
+          _this.$message({
+            message: '取消收藏成功~',
+            type: 'success',
+            duration : 1500,
+          });
+        })
+      },
+      addToFavorites(){
+        var _this = this;
+        if(Cookies.get("uid") == null) {
+          _this.$message({
+            message: '请先登录~',
+            type: 'warning',
+            duration : 1500,
+          });
+          return;
+        }
+
+        let articleID = _this.article.articleID;
+        let uid = Cookies.get("uid");
+        let title = _this.article.articleTitle;
+        let imgSrc = _this.article.imgSrc;
+
+        //console.log(title);
+        //console.log(imgSrc);
+        axios({
+          method : "get",
+          url : "http://localhost:8080/shiyi_war/addToFavorites?articleID="+articleID+"&uid="+uid+"&title="+title+"&imgSrc="+imgSrc
+        }).then(function(){
+          _this.isFavorites = 1;
+          _this.$message({
+            message: '收藏成功~',
+            type: 'success',
+            duration : 1500,
+          });
+        })
+      },
+      checkFavorites(){
+        if(Cookies.get("uid") == null) return;
+        var _this = this;
+        axios({
+          method:"get",
+          url:"http://localhost:8080/shiyi_war/checkFavorites?articleID="+this.query+"&uid="+Cookies.get("uid")
+        }).then(function(resp){
+          _this.isFavorites = resp.data;
+          //console.log(resp);
+        })
+      },
+      updateClick(){
+        var _this = this;
+        axios({
+          method:"get",
+          url:"http://localhost:8080/shiyi_war/updateClick?articleID="+this.query
+        }).then(function(resp){
+
+        })
+
+      },
+      selectByID(){
+        var _this = this;
+        let url = new URL(window.location.href);
+        var query = url.searchParams.get('articleID');
+        axios({
+          method:"get",
+          url:"http://localhost:8080/shiyi_war/selectByIDServlet?articleID="+query
+        }).then(function(resp){
+          _this.article = resp.data;
+        })
+        //return _this.article;
+        //this.article = _this.article;
+      },
+      getComments(){
+        var _this = this;
+        let url = new URL(window.location.href);
+        var query = url.searchParams.get('articleID');
+        axios({
+          method:"get",
+          url:"http://localhost:8080/shiyi_war/getComments?articleID="+query
+        }).then(function(resp){
+          if(resp.data != "no comments")
+            _this.comments = resp.data;
+        })
+      },
+      postComment(){
+
+        var _this = this;
+        if(Cookies.get("uid") != null){
+
+          //对comments数组的更新需要用到push函数，如果直接赋值则无法在页面上立即显示
+          //这是Vue2响应式依赖的局限 Vue3好像可以
+
+          let now = (new Date()).toLocaleDateString() + " " +(new Date()).toLocaleTimeString();
+
+
+          _this.comments.push(
+
+                  {
+                    username : Cookies.get("username"),
+                    avatarSrc : Cookies.get("avatarSrc"),
+                    content :  _this.my_content,
+                    time : now.replaceAll("/","-")
+                  }
+          );
+
+
+
+          let json = {
+            "articleID" : this.query,
+            "content" : _this.my_content,
+            "uid" : Cookies.get("uid")
+          };
+
+          //清空输入框
+          _this.my_content = '';
+
+          axios({
+            method : "post",
+            url : "http://localhost:8080/shiyi_war/insertComments",
+            data : JSON.stringify(json)
+          }).then(function (resp){
+
+            if(resp.data == "success"){
+              _this.$message({
+                message: '发表评论成功~',
+                type: 'success'
+              });
+              _this.article.comment_number++;
+            }
+          })
+        }else{
+          _this.$message({
+            message : '请先登录~',
+            type : 'warning'
+          })
+        }
+
+
+      }
+
+
+      }
+
+  })
+
+</script>
+</html>

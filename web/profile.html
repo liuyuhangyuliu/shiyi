@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人主页</title>
+    <link rel="stylesheet" href="https://unpkg.zhimg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="public/css/hover.css">
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        #app{
+            width: 100%;
+            height: 100%;
+            background-color: aliceblue;
+        }
+
+
+
+
+
+        /*.panel{*/
+        /*    padding: 192px 95px 95px 664px;*/
+        /*}*/
+        .panel{
+            width: 75%;
+            /*这个高度非常重要
+            不设成100%就会导致cover也跟着动
+            也就是overflow-y不生效*/
+            height: 100%;
+            overflow-y: auto;
+            position: relative;
+            float: left;
+        }
+
+        .aside{
+            width: 25%;
+            float: left;
+            height: 100%;
+            background: url("public/images/snow.jpg") center;
+            background-size: cover;
+            position: relative;
+            z-index: 100;
+        }
+        .cover{
+            width: 100%;
+            height: 100%;
+            float: left;
+            position: relative;
+            z-index: 100;
+        }
+        .copyright-panel{
+            display: block;
+            position: absolute;
+            bottom: 0;
+            text-align: center;
+            width: 100%;
+            padding-bottom: 20px;
+        }
+
+
+
+        .logo{
+            background-image: url("public/images/logo.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            display: block;
+            margin: 0 auto;
+            zoom: 130%;
+            height: 130px;
+        }
+        .header{
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 100px;
+            z-index: 99;
+            backdrop-filter: blur(10px);
+            background-color: transparent;
+        }
+
+        #header_search{
+            padding-top: 30px;
+        }
+        .menu{
+            padding-top: 25px;
+            padding-right: 49px;
+        }
+
+        .tabbar i{
+            font-size: 27px;
+            font-weight: 700;
+            color: #409EFF;
+        }
+        .tabbar li{
+            padding-right: 30px;
+
+        }
+        .tabbar div{
+            font-size: 14px;
+            line-height: 2;
+        }
+        .avatar{
+            padding-top: 25px;
+            padding-left: 73px;
+        }
+        li{
+            display: inline-block;
+        }
+        i{
+            display: block;
+        }
+        #user_cover{
+            position: absolute;
+            width: 100%;
+            clip:rect(0px,1408px,260px,0);
+            border-radius: 8px;
+            /*只能裁剪absolute的元素*/
+            /*top:从原图上侧到要裁剪区域上侧的距离*/
+            /*right：     左侧           右侧*/
+            /*bottom：       上侧          下侧*/
+            /*left：        左侧            左侧*/
+        }
+        #user_avatar{
+            height: 150px;
+            width: 150px;
+            border-radius: 8px;
+        }
+        h1{
+            font-size: 35px;
+            font-weight: 600;
+
+        }
+
+        .profile{
+            height: 100%;
+        }
+        .profile_header{
+            height: 420px;
+            padding-top: 100px;
+        }
+        .el-card{
+            height: 320px;
+        }
+        .el-card__body{
+            padding: 0;
+            height: 320px;
+        }
+        .profile_content{
+            margin-top: 20px;
+        }
+        .panel::-webkit-scrollbar {
+            width: 0;
+
+        }
+        .main_content{
+            padding-top: 165px;
+        }
+        .header_avatar{
+            padding: 2px;
+            width: 150px;
+            background-color: whitesmoke;
+            border-radius: 8px;
+            height: 150px;
+        }
+        .username{
+            position: relative;
+            top: 100px;
+        }
+        .change_cover{
+            position: relative;
+            top: 105px;
+        }
+        p{
+            font-size: small;
+            color: wheat;
+        }
+
+        a{
+            text-decoration: none;
+            color: black;
+        }
+        a:hover{
+            color: #409EFF;
+        }
+
+        .el-input{
+            margin-top: 35px;
+        }
+
+        .logout{
+            margin-top: 35px;
+            position: relative;
+            width: 33%;
+
+            margin-left: 33%;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+<div id="app">
+    <div class="header">
+
+        <el-row  type="flex" justify="end">
+<!--            <el-col :span="5" :pull="2" id="header_search">-->
+<!--                <div class="search">-->
+<!--                    <el-input  prefix-icon="el-icon-search" placeholder="搜索诗歌/诗人"></el-input>-->
+<!--                </div>-->
+
+<!--            </el-col>-->
+
+            <el-col :span="4" :pull="0" class="menu">
+                <ul class="tabbar">
+                    <li class="menu-item">
+
+                        <a href="http://localhost:8080/shiyi_war/">
+                            <i class="el-icon-house hvr-grow" style="display: block"></i>
+                            <div>首页</div>
+                        </a>
+
+
+                    </li>
+                    <li class="menu-item">
+                        <a href="http://localhost:8080/shiyi_war/about.html">
+                            <i class="el-icon-link hvr-grow" style="display: block"></i>
+                            <div>关于</div>
+                        </a>
+
+                    </li>
+                    <li class="menu-item">
+                        <a href="http://localhost:8080/shiyi_war/write.html">
+                            <i class="el-icon-edit-outline hvr-grow"  style="display: block"></i>
+                            <div>创作</div>
+                        </a>
+
+                    </li>
+
+                </ul>
+            </el-col>
+
+        </el-row>
+
+    </div>
+
+    <div class="aside">
+        <div class="cover">
+            <div class="copyright-panel">
+                <a href="" class="logo"></a>
+                <p style="margin-bottom: 10px">Copyright © 2023 All Rights Reserved</p>
+                <p>E-mail:2196933343@qq.com</p>
+            </div>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="profile">
+
+
+        <el-row class="profile_header">
+            <el-col span="23" style="padding-left: 60px">
+                <el-card>
+                    <el-row class="header_cover">
+                        <img id="user_cover" :src="coverSrc" alt="">
+                    </el-row>
+                    <el-row class="main_content">
+                        <el-col span="4" offset="2">
+                            <div class="header_avatar">
+                                <img id="user_avatar" :src="avatarSrc" alt="">
+                            </div>
+                        </el-col >
+                        <el-col class="username" span="4" offset="2">
+                            <h1>{{username}}</h1>
+                        </el-col>
+                        <el-col class="change_cover" span="4" offset="7">
+                            <!--标签属性里不允许出现引号和空格-->
+                            <el-upload :action="uploadServlet" :on-success="handleSuccess">
+                                <el-button type="primary" plain>设置封面</el-button>
+                            </el-upload>
+
+                        </el-col>
+                    </el-row>
+                </el-card>
+            </el-col>
+        </el-row>
+
+        <el-row class="profile_content">
+            <el-col span="23" style="padding-left: 60px;">
+                <el-tabs type="border-card">
+                    <el-tab-pane  >
+                        <span slot="label"><i class="el-icon-reading"></i> 我的作品</span>
+                        <el-row class="item" v-for="(myArticle,i) in myArticles" style="margin-top: 40px;">
+                            <el-col :span="18" :offset="3">
+                                <el-card  style="height: 135px;" shadow="hover" :body-style="{padding: '10px 20px 10px',height: '135px'}">
+                                    <el-row>
+                                        <el-col span="20">
+                                            <el-row style="margin-bottom: 15px;">
+                                                <h2 style="display: inline-block;margin-right: 10px;">
+                                                    <a v-bind:href="['/shiyi_war/article.html?articleID='+myArticle.articleID]">
+                                                        {{myArticle.articleTitle}}
+                                                    </a>
+                                                </h2>
+<!--                                                <h4 style="display: inline-block;">{{myArticle.articleAuthor}}</h4>-->
+                                            </el-row>
+
+
+
+                                        </el-col>
+                                        <el-col span="4" offset="" style="">
+                                            <el-image fit="cover" :src="myArticle.imgSrc" style="top: 5px;width: 100px;height: 100px;"></el-image>
+                                        </el-col>
+                                    </el-row>
+
+                                </el-card>
+                            </el-col>
+                        </el-row>
+
+                    </el-tab-pane>
+                    <el-tab-pane >
+                        <span slot="label"><i class="el-icon-collection-tag"></i> 我的收藏</span>
+                        <el-row class="item" v-for="(myFavorite,i) in myFavorites" style="margin-top: 40px;">
+                            <el-col :span="18" :offset="3">
+                                <el-card  style="height: 135px;" shadow="hover" :body-style="{padding: '10px 20px 10px',height: '135px'}">
+                                    <el-row>
+                                        <el-col span="20">
+                                            <el-row style="margin-bottom: 15px;">
+                                                <h2 style="display: inline-block;margin-right: 10px;">
+                                                    <a v-bind:href="['/shiyi_war/article.html?articleID='+myFavorite.article_id]">
+                                                        {{myFavorite.article_title}}
+                                                    </a>
+                                                </h2>
+<!--                                                <h4 style="display: inline-block;">{{myFavorite.articleAuthor}}</h4>-->
+                                            </el-row>
+
+
+
+                                        </el-col>
+                                        <el-col span="4" offset="" style="">
+                                            <el-image fit="cover" :src="myFavorite.article_imgSrc" style="top: 5px;width: 100px;height: 100px;"></el-image>
+                                        </el-col>
+                                    </el-row>
+
+                                </el-card>
+                            </el-col>
+                        </el-row>
+                    </el-tab-pane>
+                    <el-tab-pane >
+                        <span slot="label"><i class="el-icon-postcard"></i>个人资料</span>
+
+                        <el-input placeholder="" v-model="username" :readonly="true">
+                            <template slot="prepend">用户名</template>
+                        </el-input>
+
+                        <el-input placeholder="" v-model="uid" :readonly="true">
+                            <template slot="prepend">uid</template>
+                        </el-input>
+
+                        <el-popconfirm title="确定退出登陆吗?" @confirm="logout()" @cancel="cancel()">
+                            <el-button slot="reference" class="logout" type="primary" plain >退出登录</el-button>
+                        </el-popconfirm>
+
+                    </el-tab-pane>
+                </el-tabs>
+            </el-col>
+        </el-row>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+<script src="//unpkg.com/vue@2.7.14/dist/vue.js"></script>
+<script src="//unpkg.com/element-ui@2.15.13/lib/index.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script>
+    new Vue({
+        el : "#app",
+        data(){
+            return {
+                myArticles : [],
+                myFavorites : [],
+                uploadServlet : "http://localhost:8080/shiyi_war/uploadCover?uid=",
+                username : "",
+                avatarSrc : "",
+                coverSrc : "",
+                uid : ""
+
+            }
+        },
+        mounted(){
+            var _this = this;
+            this.username = Cookies.get('username');
+            this.avatarSrc = Cookies.get('avatarSrc');
+            this.coverSrc = Cookies.get('coverSrc');
+            this.uid = Cookies.get('uid');
+            this.uploadServlet = this.uploadServlet + this.uid;
+            //console.log(this.uid);
+            //console.log(this.uploadServlet);
+
+            axios({
+                method:"get",
+                url:"http://localhost:8080/shiyi_war/selectMyArticles?uid=" + _this.uid
+            }).then(function(resp){
+                _this.myArticles = resp.data;
+            })
+
+            axios({
+                method : "get",
+                url :"http://localhost:8080/shiyi_war/selectMyFavorites?uid="+ _this.uid
+            }).then(function(resp){
+                _this.myFavorites = resp.data;
+            })
+        },
+        methods:{
+            handleSuccess(resp,file){
+                this.coverSrc = resp;
+                Cookies.remove('coverSrc',{path : '/shiyi_war'});
+                Cookies.set('coverSrc',resp);
+                console.log(resp,file);
+            },
+            logout(){
+                var _this = this;
+                Cookies.remove('username',{path : '/shiyi_war'});
+                Cookies.remove('coverSrc');
+                Cookies.remove('coverSrc',{path : '/shiyi_war'});
+                Cookies.remove('uid',{path : '/shiyi_war'});
+                Cookies.remove('avatarSrc',{path : '/shiyi_war'});
+                _this.$message({
+                    message: '成功退出登录~',
+                    type: 'success',
+                    duration : 2000,
+                    onClose : function(){
+                        window.location.href = 'http://localhost:8080/shiyi_war/index.html';
+                    }
+                });
+
+
+
+            },
+            cancel(){
+                return;
+            }
+
+        }
+    })
+
+</script>
+</html>
